@@ -1,0 +1,19 @@
+.signupForm{
+    align-self: center;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    height: 300px;
+    width: 300px;
+    transform: translate(-150px,-150px);
+    -webkit-transform: translate(-150px,-150px);
+    -moz-transform: translate(-150px,-150px);
+    -ms-transform: translate(-150px,-150px);
+    -o-transform: translate(-150px,-150px);
+}
+.signupForm input{
+  width: 250px;
+}
+.signupForm button{
+  width: 200px;
+}
