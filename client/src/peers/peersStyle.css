@@ -1,0 +1,10 @@
+.peers{
+ width: 100px;
+ height: 100px;
+ background-color:#F57C00;
+ border-radius: 100%;
+ -webkit-border-radius: 100%;
+ -moz-border-radius: 100%;
+ -ms-border-radius: 100%;
+ -o-border-radius: 100%;
+}
