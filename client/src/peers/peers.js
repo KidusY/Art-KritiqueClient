@@ -1,10 +1,14 @@
 import React from 'react'
 import './peersStyle.css'
-function Peers() {
+function Peers({ img }) {
     return (
-        <div className="peers">
-            
-        </div>
+        <div className="peers" style={{
+            background: `url(${img})`, backgroundPosition: "center",
+            backgroundSize: "cover",
+            border: "4px solid #a8790e"
+        }} />
+
+
     )
 }
 

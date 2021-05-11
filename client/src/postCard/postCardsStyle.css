@@ -1,0 +1,54 @@
+.profilePic {
+  width: 70px;
+  height: 70px;
+  margin: 15px;
+
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border: 4px solid #a8790e;
+}
+.postCardContainer {
+  margin: 30px auto;
+  display: block;
+   border-radius: 40px;
+  background: #ecf0f3;
+  box-shadow: 13px 13px 20px #cbced1,
+              -13px -13px 20px #ffffff;
+  width: 90%;
+  height: 500px;
+  
+}
+.nameContainer{
+    display: flex;
+  
+}
+.nameHeading{
+    margin: 20px;
+}
+.nameContainer h3,p{
+    padding: 0;
+    margin: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+     color:#a8790e;
+    
+}
+
+.artPost{
+width: 100%;
+height: 300px;
+}
+.iconsContainer{
+    margin-top: 20px;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.iconsContainer i{
+    font-size: 30px;
+    color:#a8790e;
+}

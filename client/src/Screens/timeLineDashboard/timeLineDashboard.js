@@ -1,10 +1,24 @@
 import React from 'react'
-import Peers from '../../peers/peers'
+import './timeLinestyle.css';
+import PostCard from '../../postCard/postCard'
+import PeerCollection from '../../peersCollection/peersCollection'
+
 
 function TimeLineDashboard() {
     return (
         <div>
-            <Peers />
+        <h1 className="logo">Art-Kritique </h1>
+
+
+        <PeerCollection/>
+        <PostCard />
+        <PostCard />
+        <PostCard />
+
+
+
+
+
         </div>
     )
 }
