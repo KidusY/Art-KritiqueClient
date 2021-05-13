@@ -1,38 +1,29 @@
-.search {
+.fileUploadContainer{
   position: absolute;
   width: 100%;
   height: calc(100% - 80px);
   z-index: 1000;
   background-color: rgba(187, 187, 187, 0.308);
 }
-.searchPeerContainer {
-  border-radius: 30px;
+
+.fileUploadContainer .fileUpload{ 
+      border-radius: 30px;
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
   box-shadow: 20px 20px 51px #c4c4c4, -20px -20px 51px #ffffff;
   width: 100%;
-  height: 80px;
+  height: 100px;
   margin: 20px auto;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   -ms-border-radius: 30px;
   -o-border-radius: 30px;
-  padding: 1px;
+ 
   position: fixed;
   z-index: 1000;
 
-
 }
-.searchPeerContainer input {
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 18px;
-  color: #555;
-  padding: 20px 10px 20px 5px;
-  border-radius: 25px;
-  box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff;
-  margin: 15px auto;
-  display: block;
-  height: 45px;
-  width: 80%;
+.fileUpload input{ 
+   margin: 40px auto;
+   width: 200px;
+   display: block;
 }

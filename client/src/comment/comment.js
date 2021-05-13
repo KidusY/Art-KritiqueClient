@@ -4,7 +4,7 @@ function Comment({ name, img, comment }) {
     const [isLiked, setLiked] = useState(false);
     return (
         <React.Fragment>
-            <div className="comment" onDoubleClick={() => setLiked(!isLiked)} >
+            <div className="comment" onDoubleClick={() => setLiked(!isLiked)}>
                 <div>
                     <div style={{
                         background: `url(${img})`, backgroundPosition: "center",

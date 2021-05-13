@@ -23,7 +23,7 @@ function ButtonCustom({ label, onClickFunction }) {
         <React.Fragment>
             <ThemeProvider theme={theme}>
 
-                <Button variant="contained" color="primary" className={classes.margin} onClick={() => onClickFunction()}>
+                <Button type="submit" variant="contained" color="primary" className={classes.margin} >
                     {label}
                 </Button>
 

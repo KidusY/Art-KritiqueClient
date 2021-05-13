@@ -42,7 +42,7 @@ const ValidationTextField = withStyles({
 
 
 
-export default function CustomizedInputs({validator,label}) {
+export default function CustomizedInputs({validator,label,getText,type}) {
     const classes = useStyles();
 
     return (
@@ -54,6 +54,8 @@ export default function CustomizedInputs({validator,label}) {
                 required
                 variant="outlined" 
                 id="validation-outlined-input"
+                type= {type === "password" ? "password" : "text"}
+                onChange={(e) => { getText(e.target.value) }}
             />
         </React.Fragment>
     );

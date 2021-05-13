@@ -10,9 +10,10 @@
     
 }
 .bottomNavContainer ul{
-    display: flex;
-    justify-content: space-evenly;
-    list-style-type: none;
+   display: block;
+   margin: 0 auto !important;
+   padding: 0 !important;
+   width: 90%;
 
 }
 .bottomNavContainer ul li{
@@ -20,5 +21,6 @@
    text-align: center;
    font-size: 25px;
    color: white;
+   list-style: none;
   
 }
