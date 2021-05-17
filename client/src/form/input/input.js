@@ -46,7 +46,7 @@ export default function CustomizedInputs({validator,label,getText,type}) {
     const classes = useStyles();
 
     return (
-        <React.Fragment className={classes.root}>
+        <div className={classes.root}>
 
             <ValidationTextField
                 className={classes.margin}
@@ -57,6 +57,6 @@ export default function CustomizedInputs({validator,label,getText,type}) {
                 type= {type === "password" ? "password" : "text"}
                 onChange={(e) => { getText(e.target.value) }}
             />
-        </React.Fragment>
+        </div>
     );
 }

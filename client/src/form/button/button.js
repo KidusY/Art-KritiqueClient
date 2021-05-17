@@ -16,20 +16,21 @@ const theme = createMuiTheme({
         primary: lightGreen
     },
 });
-function ButtonCustom({ label, onClickFunction }) {
+function ButtonCustom({ label, onClickFunction, type }) {
     const classes = useStyles();
-
+    
     return (
-        <React.Fragment>
+        <div>
             <ThemeProvider theme={theme}>
+               
 
-                <Button type="submit" variant="contained" color="primary" className={classes.margin} >
+                <Button type={type || "submit"} variant="contained" color="primary" className={classes.margin} onClick={!!onClickFunction?  onClickFunction : ()=>console.log("clicked") } >
                     {label}
                 </Button>
 
 
             </ThemeProvider>
-        </React.Fragment>
+        </div>
     )
 }
 
