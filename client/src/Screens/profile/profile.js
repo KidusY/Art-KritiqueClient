@@ -9,7 +9,12 @@ function profile(props) {
         <div>
         <div className="d-flex justify-content-between">
                 <h1 className="logo">Profile </h1>
-                <i className="fas fa-sign-out-alt m-2 fs-3 text-danger" onClick={()=>props.history.push('/login')}></i>
+                <i className="fas fa-sign-out-alt m-2 fs-3 text-danger" onClick={()=>{
+                //  sessionStorage.removeItem('userInfo');
+                   sessionStorage.clear();
+
+                   props.history.push('/login')
+                }}></i>
         </div>
          
             

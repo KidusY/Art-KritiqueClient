@@ -18,9 +18,9 @@ function App() {
   useEffect(() => {
     
    const currentUserInfo = sessionStorage.getItem('userInfo');
-    console.log(currentUserInfo);
+    
    if(currentUserInfo){
-     setUserInfo(currentUserInfo);
+     setUserInfo(JSON.parse(currentUserInfo));
    }
 
     return () => {
@@ -48,12 +48,12 @@ function App() {
       {showSearchPeerModal && <SearchPeer />}
       {showUploadFileModal && <FileUpload />  }
 
-
+     
       
-      <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard />}/>
-      <Route exact path={"/profile"} component={(props) => <Profile />}/>
-      <Route exact path={"/comments"} component={(props) => <Comments />}/>
-      <Route exact path={"/login"} component={(props) => <LoginForm />}/>
+      <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo= {userInfo} />}/>
+      <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo}/>}/>
+      <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />}/>
+      <Route exact path={"/login"} component={(props) => <LoginForm setUserInfo={setUserInfo}/>}/>
       <Route exact path={"/signup"} component={(props) => <SignupForm />}/>
       <Route exact path={"/"}>
         {

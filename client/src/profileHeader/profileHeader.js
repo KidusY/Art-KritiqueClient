@@ -1,6 +1,6 @@
 import React from 'react'
 import './profileHeader.css'
-function ProfileHeader() {
+function ProfileHeader(props) {
     return (
         <div className="profileHeaderContainer">
 

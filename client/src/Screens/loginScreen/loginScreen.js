@@ -25,6 +25,7 @@ function LoginScreen(props) {
                 sessionStorage.setItem('userInfo', JSON.stringify(res.data));
 
                 if (res.data) {
+                    props.setUserInfo(res.data);
                     props.history.push('/timeline');
                 }
               
