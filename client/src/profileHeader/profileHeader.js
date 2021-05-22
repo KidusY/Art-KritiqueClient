@@ -22,7 +22,7 @@ function ProfileHeader(props) {
               
                 
                 <div style={{ width: '70%' }}>
-                    <p className="m-3"> Name </p>
+                    <p className="m-3"> {props.userInfo.displayName} </p>
                     <ul className="d-flex justify-content-evenly" style={{width:'100%', listStyle:"none", padding:0}}>
                         <li>Likes <br/> 100</li>
                         <li>Peers <br /> 100</li>

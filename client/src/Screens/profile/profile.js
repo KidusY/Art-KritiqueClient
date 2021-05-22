@@ -18,7 +18,7 @@ function profile(props) {
         </div>
          
             
-            <ProfileHeader />
+            <ProfileHeader userInfo ={props.userInfo}/>
             <div className="container d-flex flex-wrap justify-content-around">
                 <div style={{
                     background: "url(https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXJ0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60)",
