@@ -1,62 +1,55 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './profileStyle.css';
 import ProfileHeader from '../../profileHeader/profileHeader';
-import {withRouter} from 'react-router-dom'
+import api from '../../axios/axios';
+import { withRouter } from 'react-router-dom'
 
 
-function profile(props) {
+function Profile(props) {
+    const [profilePage, setProfilePage] = useState();
+    const currentUserInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+
+
+    useEffect(() => {
+        api.get(`/posts/${currentUserInfo.userId}`).then(res => {
+            setProfilePage(res.data);
+        })
+
+    }, [currentUserInfo.userId])
+
+
+    console.log(profilePage);
     return (
         <div>
-        <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between">
                 <h1 className="logo">Profile </h1>
-                <i className="fas fa-sign-out-alt m-2 fs-3 text-danger" onClick={()=>{
-                //  sessionStorage.removeItem('userInfo');
-                   sessionStorage.clear();
+                <i className="fas fa-sign-out-alt m-2 fs-3 text-danger" onClick={() => {
+                    //  sessionStorage.removeItem('userInfo');
+                    sessionStorage.clear();
 
-                   props.history.push('/login')
+                    props.history.push('/')
                 }}></i>
-        </div>
-         
-            
-            <ProfileHeader />
+            </div>
+
+
+            <ProfileHeader userInfo={props.userInfo} profilePage={profilePage} />
             <div className="container d-flex flex-wrap justify-content-around">
-                <div style={{
-                    background: "url(https://images.unsplash.com/photo-1499781350541-7783f6c6a0c8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXJ0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60)",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    width: "100px",
-                    height: "100px",
-                    marginTop: "10px",
-                    
+                {profilePage.map((post, i) =>
+                    <div style={{
+                        background: `url(${post.imgLink})`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        width: "100px",
+                        height: "100px",
+                        marginTop: "10px",
 
-                }} />
-                <div style={{
-                    background: "url(https://images.unsplash.com/photo-1561214115-f2f134cc4912?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFydHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60)",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    width: "100px",
-                    height: "100px",
-                     marginTop: "10px"
 
-                }} />
-                <div style={{
-                    background: "url(https://images.unsplash.com/photo-1554188248-986adbb73be4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8YXJ0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60)",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    width: "100px",
-                    height: "100px",
-                    marginTop: "10px"
+                    }} key={i} />
 
-                }} />
-                <div style={{
-                    background: "url(https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YXJ0fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60)",
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                    width: "100px",
-                    height: "100px",
-                    marginTop: "10px"
 
-                }} />
+                )
+
+                }
 
             </div>
 
@@ -65,4 +58,4 @@ function profile(props) {
     )
 }
 
-export default withRouter(profile);
+export default withRouter(Profile);

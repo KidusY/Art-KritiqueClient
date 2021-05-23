@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css';
 import LoginForm from './Screens/loginScreen/loginScreen'
 import SignupForm from './Screens/signupScreen/signupScreen';
@@ -8,7 +8,7 @@ import BottomNav from './bottomNavBar/bottomNavBar'
 import SearchPeer from './searchPeer/searchPeer';
 import FileUpload from './fileUpload/fileUpload';
 import Profile from './Screens/profile/profile'
-import {Redirect, Route} from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 function App() {
   const [showSearchPeerModal, setShowSearchPeerModal] = useState(false);
   const [showUploadFileModal, setShowUploadFileModal] = useState(false);
@@ -16,53 +16,60 @@ function App() {
   const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
-    
-   const currentUserInfo = sessionStorage.getItem('userInfo');
-    
-   if(currentUserInfo){
-     setUserInfo(JSON.parse(currentUserInfo));
-   }
+
+    const currentUserInfo = sessionStorage.getItem('userInfo');
+
+    if (currentUserInfo) {
+      setUserInfo(JSON.parse(currentUserInfo));
+    }
 
     return () => {
-      
+
     }
   }, [])
-  const showHideSearchModal = ()=>{
-    if (showUploadFileModal){
+  const showHideSearchModal = () => {
+    if (showUploadFileModal) {
       setShowUploadFileModal(false);
     }
     setShowSearchPeerModal(!showSearchPeerModal);
-    
-  } 
 
-  const showHideUploadFileModal = ()=>{
+  }
+
+  const showHideUploadFileModal = () => {
     if (showSearchPeerModal) {
       setShowSearchPeerModal(false);
     }
-    
+
     setShowUploadFileModal(!showUploadFileModal);
   }
   return (
     <div className="App">
 
       {showSearchPeerModal && <SearchPeer />}
-      {showUploadFileModal && <FileUpload />  }
+      {showUploadFileModal && <FileUpload />}
 
-     
-      
-      <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo= {userInfo} />}/>
-      <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo}/>}/>
-      <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />}/>
-      <Route exact path={"/login"} component={(props) => <LoginForm setUserInfo={setUserInfo}/>}/>
-      <Route exact path={"/signup"} component={(props) => <SignupForm />}/>
+
+      {
+        userInfo ?
+        <React.Fragment>
+          <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo={userInfo} />} />
+          <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo} />} />
+          <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />} />
+        </React.Fragment>
+        :
+       <Redirect to="/"/>
+      }
+
+
+      <Route exact path={"/signup"} component={(props) => <SignupForm />} />
       <Route exact path={"/"}>
         {
-          userInfo ? <Redirect to="/timeline"/> : 
-          <LoginForm/>
+          userInfo ? <Redirect to="/timeline" /> :
+            <LoginForm setUserInfo={setUserInfo} />
         }
       </Route>
 
-      <BottomNav setShowSearchPeerModal={showHideSearchModal} showSearchPeerModal={showHideSearchModal} showHideUploadFileModal={showHideUploadFileModal}/>
+      { userInfo && <BottomNav setShowSearchPeerModal={showHideSearchModal} showSearchPeerModal={showHideSearchModal} showHideUploadFileModal={showHideUploadFileModal} />}
 
     </div>
   );
