@@ -29,10 +29,17 @@ function Profile(props) {
 
                     props.history.push('/')
                 }}></i>
+<<<<<<< HEAD
             </div>
 
 
             <ProfileHeader userInfo={props.userInfo} profilePage={profilePage} />
+=======
+        </div>
+         
+            
+            <ProfileHeader userInfo ={props.userInfo}/>
+>>>>>>> cd599aea97e0f512ab017d4015c34aefb46e0a7b
             <div className="container d-flex flex-wrap justify-content-around">
                 {profilePage.map((post, i) =>
                     <div style={{

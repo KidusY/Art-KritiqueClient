@@ -10,9 +10,6 @@ function LoginScreen(props) {
 
     const [error, setError] = useState(null);
 
-    console.log(passwordInput);
-
-
     return (
         <form className="loginForm" onSubmit={(e) => {
             e.preventDefault();
@@ -21,18 +18,16 @@ function LoginScreen(props) {
                 email: emailInput,
                 password: passwordInput
             }).then(res => {
-
                 sessionStorage.setItem('userInfo', JSON.stringify(res.data));
-
                 if (res.data) {
                     props.setUserInfo(res.data);
                     props.history.push('/timeline');
                 }
-              
-            }).
-            catch(err=>{
-               setError( err?.response?.data?.errorMessage);
+
             })
+                .catch(err => {
+                    setError(err?.response?.data?.errorMessage);
+                })
 
         }}>
             {error && <label className="text-danger">{error}</label>}
