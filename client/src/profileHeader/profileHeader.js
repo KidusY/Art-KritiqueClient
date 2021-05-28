@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
+import EditProfileModal from './editProfileModal/editProfileModal'
 import './profileHeader.css'
 function ProfileHeader(props) {
+    const [modalShow, setModalShow] = useState(false);
     return (
         <div className="profileHeaderContainer">
 
-        <div className="profileInfo d-flex">
-        <div>
+            <div className="profileInfo d-flex">
+                <div>
                     <div style={{
-                        background: "url(https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60)",
+                        background: props.userInfo.profileImage ? `url(${props.userInfo.profileImage})` : "url(https://britz.mcmaster.ca/images/nouserimage.gif/image)",
                         backgroundPosition: "center",
                         backgroundSize: "cover",
                         border: "4px solid #a8790e",
@@ -17,27 +19,27 @@ function ProfileHeader(props) {
 
                     }} />
 
-                    <p className="text-center text-primary"> Edit </p>
-        </div>
-              
-                
+                    <p className="text-center text-primary" onClick={() => setModalShow(!modalShow)}> Edit </p>
+                </div>
                 <div style={{ width: '70%' }}>
                     <p className="m-3"> {props.userInfo.displayName} </p>
-                    <ul className="d-flex justify-content-evenly" style={{width:'100%', listStyle:"none", padding:0}}>
-                        <li>Likes <br/> 100</li>
+                    <ul className="d-flex justify-content-evenly" style={{ width: '100%', listStyle: "none", padding: 0 }}>
+                        <li>Likes <br /> {props.totalLikes}</li>
                         <li>Peers <br /> {props.userInfo.peers.length}</li>
                         <li>Curated <br /> {props.profilePage.length}</li>
                     </ul>
                 </div>
-               
-                
 
-        </div>
+            </div>
 
-        <div>
-                   <p className="text-center"> Bio Goes here </p> 
-        </div>
-            
+            <div>
+                <p className="text-center"> {props.userInfo?.bio || ''} </p>
+            </div>
+
+            <EditProfileModal
+                userInfo={props.userInfo}
+                show={modalShow}
+                onHide={() => setModalShow(false)} />
         </div>
     )
 }

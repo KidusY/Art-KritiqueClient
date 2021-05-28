@@ -20,13 +20,19 @@ function App() {
     const currentUserInfo = sessionStorage.getItem('userInfo');
 
     if (currentUserInfo) {
-      setUserInfo(JSON.parse(currentUserInfo));
+      setCurrentUserInfo(JSON.parse(currentUserInfo));
     }
 
     return () => {
 
     }
-  }, [])
+  }, []);
+
+  const setCurrentUserInfo = (userInfo)=>{
+     sessionStorage.setItem('userInfo',userInfo);
+     setUserInfo(userInfo);
+  }
+
   const showHideSearchModal = () => {
     if (showUploadFileModal) {
       setShowUploadFileModal(false);
@@ -42,18 +48,19 @@ function App() {
 
     setShowUploadFileModal(!showUploadFileModal);
   }
+
   return (
     <div className="App">
 
       {showSearchPeerModal && <SearchPeer />}
-      {showUploadFileModal && <FileUpload />}
+      {showUploadFileModal && <FileUpload setShowUploadFileModal={setShowUploadFileModal}/>}
 
 
       {
         userInfo ?
         <React.Fragment>
           <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo={userInfo} />} />
-          <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo} />} />
+            <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo} setUserInfo={setCurrentUserInfo} />} />
           <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />} />
         </React.Fragment>
         :

@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import Input from '../../form/input/input';
 import Button from '../../form/button/button'
 import { withRouter } from 'react-router-dom';
-import axios from 'axios';
-import './loginScreenStyle.css'
+import axios from '../../axios/axios';
+import './loginScreenStyle.css';
 function LoginScreen(props) {
     const [emailInput, setEmailInputText] = useState('')
     const [passwordInput, setPasswordInputText] = useState('');
 
     const [error, setError] = useState(null);
 
+
+
     return (
         <form className="loginForm" onSubmit={(e) => {
             e.preventDefault();
             setError(null);
-            axios.post('http://localhost:8000/login', {
+            axios.post('/login', {
                 email: emailInput,
                 password: passwordInput
             }).then(res => {
@@ -31,12 +33,12 @@ function LoginScreen(props) {
 
         }}>
             {error && <label className="text-danger">{error}</label>}
-            <Input label={"Email"} getText={setEmailInputText} /><br />
+            <Input label={"Email"} type={"email"} getText={setEmailInputText} /><br />
             <Input label={"Password"} type="password" getText={setPasswordInputText} /> <br />
 
             <Button label={"Login"} /> <br />
             <Button type="button" label={"Signup"} onClickFunction={() => { props.history.push('/signup') }} />
-
+            
         </form>
     )
 }

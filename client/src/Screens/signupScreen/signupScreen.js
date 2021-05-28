@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import Input from '../../form/input/input';
-
+import axios from '../../axios/axios';
 import Button from '../../form/button/button';
 
-import axios from 'axios';
 import './signUpScreenStyle.css';
-function SignupScreen() {
+import { withRouter } from 'react-router-dom';
+function SignupScreen(props) {
     const [email, setEmail] = useState('')
     const [displayName, setdisplayName] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('');
+    const [isLoading, setIsloading] = useState(false);
 
     const [errorMessageFromServer, setErrorMessageFromServer] = useState(null);
 
@@ -18,12 +19,14 @@ function SignupScreen() {
         <form className="signupForm" onSubmit={(e) => {
             setErrorMessageFromServer(null);
             e.preventDefault();
-            axios.post('http://localhost:8000/users', {
+            axios.post('/users', {
                 displayName,
                 email,
                 password
             }).then((res) => {
-                console.log(res.data);
+                if (res.data) {
+                    props.history.push('/');
+                }
 
             }).catch((err) => {
                 setErrorMessageFromServer(err.response.data.errorMessage);
@@ -31,7 +34,7 @@ function SignupScreen() {
             })
         }}>
             {errorMessageFromServer && <label className="text-danger">{errorMessageFromServer}</label>}
-            <Input label={"Display name"} getText={setdisplayName} className="input" /> <br />
+            <Input label={"Display name"} getText={setdisplayName} className="input" type="text" /> <br />
             <Input label={"Email"} getText={setEmail} className="input" /> <br />
             <Input type="password" label={"Password"} getText={setPassword} /><br />
             <Input type="password" label={"Confirm password"} getText={setconfirmPassword} /><br />
@@ -40,4 +43,4 @@ function SignupScreen() {
     )
 }
 
-export default SignupScreen
+export default withRouter(SignupScreen)

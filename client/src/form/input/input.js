@@ -54,7 +54,7 @@ export default function CustomizedInputs({validator,label,getText,type}) {
                 required
                 variant="outlined" 
                 id="validation-outlined-input"
-                type= {type === "password" ? "password" : "text"}
+                type= {type || 'text'}
                 onChange={(e) => { getText(e.target.value) }}
             />
         </div>
