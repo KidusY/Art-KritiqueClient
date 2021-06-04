@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import EditProfileModal from './editProfileModal/editProfileModal'
 import './profileHeader.css'
 function ProfileHeader(props) {
-    const [modalShow, setModalShow] = useState(false);
+   const [modalShow, setModalShow] = useState(false);
     return (
         <div className="profileHeaderContainer">
 
@@ -19,7 +19,7 @@ function ProfileHeader(props) {
 
                     }} />
 
-                    <p className="text-center text-primary" onClick={() => setModalShow(!modalShow)}> Edit </p>
+                   {(props.userInfo.userId === JSON.parse(sessionStorage.getItem('userInfo')).userId) && <p className="text-center text-primary" onClick={() => setModalShow(!modalShow)}> Edit </p>}
                 </div>
                 <div style={{ width: '70%' }}>
                     <p className="m-3"> {props.userInfo.displayName} </p>

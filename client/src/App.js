@@ -7,7 +7,8 @@ import Comments from './Screens/comments/comments';
 import BottomNav from './bottomNavBar/bottomNavBar'
 import SearchPeer from './searchPeer/searchPeer';
 import FileUpload from './fileUpload/fileUpload';
-import Profile from './Screens/profile/profile'
+import Profile from './Screens/profile/profile';
+import PeersProfile from './Screens/peersProfile/peersProfile';
 import { Redirect, Route } from 'react-router-dom'
 function App() {
   const [showSearchPeerModal, setShowSearchPeerModal] = useState(false);
@@ -18,9 +19,10 @@ function App() {
   useEffect(() => {
 
     const currentUserInfo = sessionStorage.getItem('userInfo');
+    const user = JSON.parse(currentUserInfo);
 
     if (currentUserInfo) {
-      setCurrentUserInfo(JSON.parse(currentUserInfo));
+      setUserInfo(user);
     }
 
     return () => {
@@ -28,9 +30,9 @@ function App() {
     }
   }, []);
 
-  const setCurrentUserInfo = (userInfo)=>{
-     sessionStorage.setItem('userInfo',userInfo);
-     setUserInfo(userInfo);
+  const setCurrentUserInfo = (userInfo) => {
+    sessionStorage.setItem('userInfo', userInfo);
+    setUserInfo(userInfo);
   }
 
   const showHideSearchModal = () => {
@@ -53,28 +55,33 @@ function App() {
     <div className="App">
 
       {showSearchPeerModal && <SearchPeer />}
-      {showUploadFileModal && <FileUpload setShowUploadFileModal={setShowUploadFileModal}/>}
+      {showUploadFileModal && <FileUpload setShowUploadFileModal={setShowUploadFileModal} />}
 
-
-      {
-        userInfo ?
-        <React.Fragment>
-          <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo={userInfo} />} />
-            <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo} setUserInfo={setCurrentUserInfo} />} />
-          <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />} />
-        </React.Fragment>
-        :
-       <Redirect to="/"/>
-      }
-
-
-      <Route exact path={"/signup"} component={(props) => <SignupForm />} />
-      <Route exact path={"/"}>
+      <div className="routes">
         {
-          userInfo ? <Redirect to="/timeline" /> :
-            <LoginForm setUserInfo={setUserInfo} />
+          userInfo ?
+            <React.Fragment>
+              <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo={userInfo} />} />
+              <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo} setUserInfo={setCurrentUserInfo} />} />
+              <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />} />
+              <Route exact path={"/peerprofile"} component={(props) => <PeersProfile userInfo={userInfo} />} />
+            </React.Fragment>
+            :
+            <Redirect to="/" />
         }
-      </Route>
+
+
+        <Route exact path={"/signup"} component={(props) => <SignupForm />} />
+        <Route exact path={"/"}>
+          {
+            userInfo ? <Redirect to="/timeline" /> :
+              <LoginForm setUserInfo={setUserInfo} />
+          }
+        </Route>
+
+      </div>
+
+
 
       { userInfo && <BottomNav setShowSearchPeerModal={showHideSearchModal} showSearchPeerModal={showHideSearchModal} showHideUploadFileModal={showHideUploadFileModal} />}
 
