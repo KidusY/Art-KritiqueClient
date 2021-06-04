@@ -22,9 +22,7 @@ function Profile(props) {
         })
 
     }, [currentUserInfo.userId, totalLikes])
-
-
-    console.log(totalLikes);
+    
     return (
         <div>
             <div className="d-flex justify-content-between">

@@ -5,5 +5,6 @@
       padding:5px;
 }
 .routes{
-      margin-bottom: 100px;
+      height: calc(100vh - 70px);
+      margin-bottom: 60px;
 }

@@ -1,36 +1,53 @@
-.comments{
-     width: 100%;
-     min-height: 100vh;
+.comments {
+	display: block;
+	width: 100%;
+	min-height: 100vh;
 }
-.comments h2{
-     color:#a8790e;
-     font-style: italic;
-     font-weight: bold;
-}
+.comments h2 {
 
-.commentsInput{
-     display: flex;
-     justify-content: center;
+	color: #a8790e;
+	font-style: italic;
+	font-weight: bold;
+}
+.comments .header{
      position: fixed;
-     bottom: 80px;
+     top: 0;
+     z-index: 1000;
+     background-color: white;
      width: 100%;
+     height: 130px;
+}
+.header .profilePic{
+     margin: 2px;
+}
+.commentsInput {
+	display: flex;
+     justify-content: space-evenly;
+	position: fixed;
+	bottom: 80px;
+	width: 100%;
+     height: 70px;
+     background-color: white;
 }
 
-.commentsInput .makeStyles-root-1{
-     width:85%;
-      
-       
+.commentsInput .makeStyles-root-1 {
+	width: 85%;
+     margin-top: 20px;
+     height: 50px;
+}
+.commentsInput .MuiOutlinedInput-input{
+     padding:10.5px 14px;
 }
 
-.commentsInput button{
-     width: 30px;
-     padding: 0;
-     margin: 0;
-     background: none;
-     border: none;
-}    
+.commentsInput button {
+	width: 30px;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+}
 
-.commentsInput button i{
-     font-size: 25px;
-     color:#a8790e;
-}    
+.commentsInput button i {
+	font-size: 25px;
+	color: #a8790e;
+}
