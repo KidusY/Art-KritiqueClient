@@ -1,0 +1,36 @@
+.comments{
+     width: 100%;
+     min-height: 100vh;
+}
+.comments h2{
+     color:#a8790e;
+     font-style: italic;
+     font-weight: bold;
+}
+
+.commentsInput{
+     display: flex;
+     justify-content: center;
+     position: fixed;
+     bottom: 80px;
+     width: 100%;
+}
+
+.commentsInput .makeStyles-root-1{
+     width:85%;
+      
+       
+}
+
+.commentsInput button{
+     width: 30px;
+     padding: 0;
+     margin: 0;
+     background: none;
+     border: none;
+}    
+
+.commentsInput button i{
+     font-size: 25px;
+     color:#a8790e;
+}    

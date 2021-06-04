@@ -51,7 +51,7 @@ function PostCard(props) {
                     <div className="iconsContainer">
 
                         {isLiked ? <i className="fas fa-heart" onClick={() => handleLikedPost()}></i> : <i className="far fa-heart" onClick={() => handleLikedPost()}></i>}
-                        <i className="fas fa-comment-dots" onClick={() => props.history.push('/comments')}></i>
+                        <i className="fas fa-comment-dots" onClick={() => props.history.push('/comments',{comments:props.comments,postTitle:props.title,postId:props.postId})}></i>
 
                     </div>
 

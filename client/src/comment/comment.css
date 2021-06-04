@@ -1,36 +1,43 @@
+.commentContainer {
+    display: flex;
+	width: 90%;
+    padding: 10px;
+	margin: 20px auto;
+	min-height: 120px;
+	height: auto;
+	border-radius: 20px;
+	background: linear-gradient(145deg, #ffffff, #e6e6e6);
+	box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	-o-border-radius: 20px;
+}
 .comment {
-  margin: 20px auto;
-  width: 90%;
-  min-height: 80px;
-  height: auto;
-  border-radius:20px;
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
-  -webkit-border-radius:20px;
-  -moz-border-radius:20px;
-  -ms-border-radius:20px;
-  -o-border-radius:20px;
-  display: flex;
-  justify-content: center;
+   
+	min-height: 50px;
+	height: auto;
+	display: flex;
+	justify-content: center;
 }
-.comment p{
-    margin: 10px;
-}   
+.comment p {
+	margin: 10px;
+	font-size: 15px;
+}
 
-.textComment{
-    width: 90%;
+.textComment {
+	width: 100%;
 }
-.comment i{
-    display: block;
-    position: relative;
-    top: 40%;
-    transform: translateY(-15px);
-    margin:0 auto ;
-    font-size: 25px;
-    text-align: center;
-    -webkit-transform: translateY(-15px);
-    -moz-transform: translateY(-15px);
-    -ms-transform: translateY(-15px);
-    -o-transform: translateY(-15px);
-    color: #e53935
+.likedBtn {
+    align-self: flex-end;
+    height: 100%;
+	position: relative;
+    right: 0;
+	width: 30px;
+	height: 100%;
+	margin-top: 10px;
+}
+.likedBtn i {
+	color: #e53935;
+	font-size: 20px;
 }

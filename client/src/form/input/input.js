@@ -42,13 +42,14 @@ const ValidationTextField = withStyles({
 
 
 
-export default function CustomizedInputs({validator,label,getText,type}) {
+export default function CustomizedInputs({validator,label,getText,type,width,height}) {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
 
             <ValidationTextField
+            style={{width:width || "300px", height:height || '50px'}}
                 className={classes.margin}
                 label={label}
                 required

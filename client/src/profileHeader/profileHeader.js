@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import EditProfileModal from './editProfileModal/editProfileModal'
+import EditProfileModal from './editProfileModal/editProfileModal';
+import {withRouter} from 'react-router-dom';
 import './profileHeader.css'
 function ProfileHeader(props) {
    const [modalShow, setModalShow] = useState(false);
     return (
         <div className="profileHeaderContainer">
-
+        
             <div className="profileInfo d-flex">
                 <div>
                     <div style={{
@@ -44,4 +45,4 @@ function ProfileHeader(props) {
     )
 }
 
-export default ProfileHeader
+export default withRouter(ProfileHeader);
