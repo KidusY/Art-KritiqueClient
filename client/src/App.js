@@ -9,7 +9,7 @@ import SearchPeer from './searchPeer/searchPeer';
 import FileUpload from './fileUpload/fileUpload';
 import Profile from './Screens/profile/profile';
 import PeersProfile from './Screens/peersProfile/peersProfile';
-import { Redirect, Route } from 'react-router-dom'
+import {Redirect, Route } from 'react-router-dom'
 function App() {
   const [showSearchPeerModal, setShowSearchPeerModal] = useState(false);
   const [showUploadFileModal, setShowUploadFileModal] = useState(false);
@@ -50,7 +50,7 @@ function App() {
 
     setShowUploadFileModal(!showUploadFileModal);
   }
-
+  
   return (
     <div className="App">
 
@@ -88,5 +88,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

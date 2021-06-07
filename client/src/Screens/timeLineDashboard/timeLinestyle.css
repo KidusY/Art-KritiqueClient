@@ -1,4 +1,33 @@
-.peerCollection{
-    display: flex;
-    justify-content: space-evenly;
+.timeline .profilePic {
+	margin: 5px;
+}
+.peerCollection {
+	display: flex;
+	justify-content: space-evenly;
+}
+ .addPeersFromTimelineBtn {
+	display: flex !important;
+	max-width: 70px;	
+	align-content: center;
+	justify-content: center;
+	background-color: #a8790e;
+	cursor: pointer;
+	transition: ease-in-out 0.5s;
+	-webkit-transition: ease-in-out 0.5s;
+	-moz-transition: ease-in-out 0.5s;
+	-ms-transition: ease-in-out 0.5s;
+	-o-transition: ease-in-out 0.5s;
+}
+ .addPeersFromTimelineBtn:hover {
+	background-color: #d8b460;
+	transition: ease-in-out 0.5s;
+	-webkit-transition: ease-in-out 0.5s;
+	-moz-transition: ease-in-out 0.5s;
+	-ms-transition: ease-in-out 0.5s;
+	-o-transition: ease-in-out 0.5s;
+}
+ .addPeersFromTimelineBtn i {
+	align-self: center;
+	font-size: 30px;
+	color: white;
 }

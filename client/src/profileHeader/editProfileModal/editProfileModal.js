@@ -4,17 +4,28 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { storage } from '../../firebase/firebase';
 import axios from '../../axios/axios';
+import updateSessionStorage from '../../updateSessionStorage';
 function EditProfileModal(props) {
     const [file, setFile] = React.useState();
-    const [displayName, setDisplayName] = React.useState(props.userInfo.displayName ||'');
-    const [bio, setBio] = React.useState(props.userInfo.bio  || '');
+    const [displayName, setDisplayName] = React.useState(props.userInfo.displayName || JSON.parse(sessionStorage.getItem('userInfo')).displayName);
+    const [bio, setBio] = React.useState(props.userInfo.bio || JSON.parse(sessionStorage.getItem('userInfo')).bio);
     const onFileSelect = (e) => {
         setFile(e.target.files[0])
     }
     const updateProfile = (e) => {
         e.preventDefault();
-        console.log("sdfsdf")
         const { displayName, bio } = e.target;
+        if (!file) {
+            const postData = {
+                displayName: displayName.value,
+                bio: bio.value,
+            }
+            axios.put(`/users/profile/${JSON.parse(sessionStorage.getItem('userInfo')).userId}`, postData)
+                .then(res => updateSessionStorage())
+                .catch(err => console.log(err))
+            
+            return
+        }
         const uploadTask = storage.ref(`images/${file.name}`).put(file);
         uploadTask.on("state_changed", snapshot => { }, error => console.log(error),
             () => {
@@ -22,20 +33,19 @@ function EditProfileModal(props) {
                     .child(file.name)
                     .getDownloadURL()
                     .then(imgLink => {
-                        console.log(imgLink);
-
                         const postData = {
                             displayName: displayName.value,
                             bio: bio.value,
                             imgLink,
                         }
                         axios.put(`/users/profile/${JSON.parse(sessionStorage.getItem('userInfo')).userId}`, postData)
-                            .then(res => console.log(res.data))
+                            .then(res => updateSessionStorage())
                             .catch(err => console.log(err))
                     })
             }
 
         )
+        updateSessionStorage();
     }
     return (
         <Modal
@@ -54,11 +64,11 @@ function EditProfileModal(props) {
                     <Form.Label column sm="2">
                         Display Name
                      </Form.Label>
-                    <Form.Control type="text" name="displayName" value={displayName} onChange={(e)=>setDisplayName(e.target.value)} />
+                    <Form.Control type="text" name="displayName" value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
                     <Form.Label column sm="2">
                         Bio
                      </Form.Label>
-                    <Form.Control type="text" name="bio" value={bio} onChange={(e)=>setBio(e.target.value)} />
+                    <Form.Control type="text" name="bio" value={bio} onChange={(e) => setBio(e.target.value)} />
                     <Form.Label column sm="2">
                         Profile Image
                      </Form.Label>

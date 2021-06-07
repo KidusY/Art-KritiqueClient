@@ -1,11 +1,13 @@
 .search {
-  position: absolute;
+  position: absolute;  
   width: 100%;
   height: calc(100% - 80px);
   z-index: 1000;
-  background-color: rgba(187, 187, 187, 0.308);
+  background-color: rgba(194, 194, 194, 0.849);
 }
-.searchPeerContainer {
+.searchPeerContainer {  
+  position: absolute;
+  top: 0;
   border-radius: 30px;
   background: linear-gradient(145deg, #ffffff, #e6e6e6);
   box-shadow: 20px 20px 51px #c4c4c4, -20px -20px 51px #ffffff;
