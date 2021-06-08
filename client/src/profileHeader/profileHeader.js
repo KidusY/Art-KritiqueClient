@@ -63,8 +63,7 @@ function ProfileHeader(props) {
                 <p className="text-center"> {props.userInfo?.bio || ''} </p>
             </div>
 
-            <EditProfileModal
-                userInfo={props.userInfo}
+            <EditProfileModal         
                 show={modalShow}
                 onHide={() => setModalShow(false)} />
         </div>

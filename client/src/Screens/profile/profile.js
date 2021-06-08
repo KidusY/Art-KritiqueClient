@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import {useDispatch} from 'react-redux'
 import './profileStyle.css';
 import ProfileHeader from '../../profileHeader/profileHeader';
 import api from '../../axios/axios';
@@ -7,13 +8,13 @@ import { withRouter } from 'react-router-dom'
 
 function Profile(props) {
     const [profilePage, setProfilePage] = useState(null);
+    const dispatch = useDispatch();
     const currentUserInfo = JSON.parse(sessionStorage.getItem('userInfo'));
     const [totalLikes, setTotalLikes] = useState(0);
 
     useEffect(() => {
         let likes = 0;
-        api.get(`/posts/${currentUserInfo.userId}`).then(res => {
-            console.log(res);
+        api.get(`/posts/${currentUserInfo.userId}`).then(res => {            
             res.data.forEach(posts => {
                 likes = totalLikes + posts.likes.length;
             })
@@ -30,7 +31,11 @@ function Profile(props) {
                 <i className="fas fa-sign-out-alt m-2 fs-3 text-danger" onClick={() => {
                     //  sessionStorage.removeItem('userInfo');
                     sessionStorage.clear();
-                    props.setUserInfo(null);
+                    dispatch({
+                        type: 'LogOutUser',
+                        payload: { authToken:null}
+                    })
+                    props.history.push('/')
                 }}></i>
             </div>
             {

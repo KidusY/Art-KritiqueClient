@@ -3,17 +3,30 @@ import './timeLinestyle.css';
 import PostCard from '../../postCard/postCard'
 import PeerCollection from '../../peersCollection/peersCollection'
 import axios from '../../axios/axios'
+import Spinner from '../../spinner/spinner'
+
 
 
 function TimeLineDashboard({ userInfo }) {
     const [currentUserInfo, setCurrentUserInfo] = useState(null);
     const [allUsers, setAllUsers] = useState(null);
     const [posts, setPosts] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const info = sessionStorage.getItem('userInfo');
         setCurrentUserInfo(JSON.parse(info));
-        axios('/posts').then(res => setPosts(res.data)).catch(err => console.log(err));
+        setIsLoading(false);
+        axios('/posts')
+            .then(res => {
+                setPosts(res.data);
+                setIsLoading(false);
+
+            })
+            .catch(err => {
+                setIsLoading(false);
+                console.log(err)
+            });
 
     }, [])
 
@@ -23,7 +36,7 @@ function TimeLineDashboard({ userInfo }) {
 
     return (
         <div className="timeline">
-            <div style={{ position: 'fixed', minWidth: '100%',top:0,background:"white",paddingBottom:'30px' }}>
+            <div style={{ position: 'fixed', minWidth: '100%', top: 0, background: "white", paddingBottom: '30px' }}>
                 <h1 className="logo">Art-Kritique </h1>
 
                 {
@@ -49,9 +62,9 @@ function TimeLineDashboard({ userInfo }) {
 
                     </div>
                 }
-        </div>
-           
-            <div style={{marginTop:'150px'}}>
+            </div>
+          { isLoading && <Spinner />}
+            <div style={{ marginTop: '150px' }}>
                 {
 
                     posts && <React.Fragment>
@@ -68,7 +81,7 @@ function TimeLineDashboard({ userInfo }) {
                     </React.Fragment>
                 }
             </div>
-           
+
         </div>
     )
 }

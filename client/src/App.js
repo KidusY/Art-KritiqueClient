@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import {useSelector,useDispatch} from 'react-redux'
 import './App.css';
 import LoginForm from './Screens/loginScreen/loginScreen'
 import SignupForm from './Screens/signupScreen/signupScreen';
@@ -9,8 +10,11 @@ import SearchPeer from './searchPeer/searchPeer';
 import FileUpload from './fileUpload/fileUpload';
 import Profile from './Screens/profile/profile';
 import PeersProfile from './Screens/peersProfile/peersProfile';
-import {Redirect, Route } from 'react-router-dom'
+import {Redirect, Route } from 'react-router-dom';
+
 function App() {
+  const state = useSelector(state=>state);
+  const dispatch = useDispatch();
   const [showSearchPeerModal, setShowSearchPeerModal] = useState(false);
   const [showUploadFileModal, setShowUploadFileModal] = useState(false);
 
@@ -22,13 +26,17 @@ function App() {
     const user = JSON.parse(currentUserInfo);
 
     if (currentUserInfo) {
-      setUserInfo(user);
+      //setUserInfo(user);
+      dispatch({
+        type:'LoginUser',
+        payload:user
+      })
     }
 
     return () => {
 
     }
-  }, []);
+  }, [dispatch]);
 
   const setCurrentUserInfo = (userInfo) => {
     sessionStorage.setItem('userInfo', userInfo);
@@ -51,6 +59,7 @@ function App() {
     setShowUploadFileModal(!showUploadFileModal);
   }
   
+  console.log("sdfasdf",state);
   return (
     <div className="App">
 
@@ -59,12 +68,12 @@ function App() {
 
       <div className="routes">
         {
-          userInfo ?
+          state.LoginReducer.authToken ?
             <React.Fragment>
-              <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo={userInfo} />} />
-              <Route exact path={"/profile"} component={(props) => <Profile userInfo={userInfo} setUserInfo={setCurrentUserInfo} />} />
-              <Route exact path={"/comments"} component={(props) => <Comments userInfo={userInfo} />} />
-              <Route exact path={"/peerprofile"} component={(props) => <PeersProfile userInfo={userInfo} />} />
+              <Route exact path={"/timeline"} component={(props) => <TimeLineDashBoard userInfo={state.LoginReducer} />} />
+              <Route exact path={"/profile"} component={(props) => <Profile userInfo={state.LoginReducer} setUserInfo={setCurrentUserInfo} />} />
+              <Route exact path={"/comments"} component={(props) => <Comments userInfo={state.LoginReducer} />} />
+              <Route exact path={"/peerprofile"} component={(props) => <PeersProfile userInfo={state.LoginReducer} />} />
             </React.Fragment>
             :
             <Redirect to="/" />
@@ -74,7 +83,7 @@ function App() {
         <Route exact path={"/signup"} component={(props) => <SignupForm />} />
         <Route exact path={"/"}>
           {
-            userInfo ? <Redirect to="/timeline" /> :
+            state.LoginReducer.authToken  ? <Redirect to="/timeline" /> :
               <LoginForm setUserInfo={setUserInfo} />
           }
         </Route>
@@ -83,7 +92,7 @@ function App() {
 
 
 
-      { userInfo && <BottomNav setShowSearchPeerModal={showHideSearchModal} showSearchPeerModal={showHideSearchModal} showHideUploadFileModal={showHideUploadFileModal} />}
+      { state.LoginReducer.authToken && <BottomNav setShowSearchPeerModal={showHideSearchModal} showSearchPeerModal={showHideSearchModal} showHideUploadFileModal={showHideUploadFileModal} />}
 
     </div>
   );

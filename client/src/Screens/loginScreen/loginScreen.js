@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useDispatch} from 'react-redux'
 import Input from '../../form/input/input';
 import Button from '../../form/button/button'
 import { withRouter } from 'react-router-dom';
@@ -7,10 +8,8 @@ import './loginScreenStyle.css';
 function LoginScreen(props) {
     const [emailInput, setEmailInputText] = useState('')
     const [passwordInput, setPasswordInputText] = useState('');
-
     const [error, setError] = useState(null);
-
-
+    const dispatch = useDispatch();
 
     return (
         <form className="loginForm" onSubmit={(e) => {
@@ -22,7 +21,11 @@ function LoginScreen(props) {
             }).then(res => {
                 sessionStorage.setItem('userInfo', JSON.stringify(res.data));
                 if (res.data) {
-                    props.setUserInfo(res.data);
+                  //  props.setUserInfo(res.data);
+                    dispatch({
+                        type: "LoginUser",
+                        payload:res.data
+                    })
                     props.history.push('/timeline');
                 }
 

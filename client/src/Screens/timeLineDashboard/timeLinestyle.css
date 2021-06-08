@@ -1,5 +1,7 @@
 .timeline .profilePic {
 	margin: 5px;
+	width: 60px;
+	height: 60px;
 }
 .peerCollection {
 	display: flex;
@@ -7,7 +9,8 @@
 }
  .addPeersFromTimelineBtn {
 	display: flex !important;
-	max-width: 70px;	
+	max-width: 60px;
+	max-height: 60px;	
 	align-content: center;
 	justify-content: center;
 	background-color: #a8790e;
@@ -28,6 +31,6 @@
 }
  .addPeersFromTimelineBtn i {
 	align-self: center;
-	font-size: 30px;
+	font-size: 25px;
 	color: white;
 }

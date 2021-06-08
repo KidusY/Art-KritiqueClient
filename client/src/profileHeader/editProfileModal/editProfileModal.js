@@ -1,14 +1,17 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { storage } from '../../firebase/firebase';
 import axios from '../../axios/axios';
-import updateSessionStorage from '../../updateSessionStorage';
+
 function EditProfileModal(props) {
     const [file, setFile] = React.useState();
-    const [displayName, setDisplayName] = React.useState(props.userInfo.displayName || JSON.parse(sessionStorage.getItem('userInfo')).displayName);
-    const [bio, setBio] = React.useState(props.userInfo.bio || JSON.parse(sessionStorage.getItem('userInfo')).bio);
+    const dispatch = useDispatch();
+    const state = useSelector(state => state)
+    const [displayName, setDisplayName] = React.useState(state.LoginReducer.displayName || JSON.parse(sessionStorage.getItem('userInfo')).displayName);
+    const [bio, setBio] = React.useState(state.LoginReducer || JSON.parse(sessionStorage.getItem('userInfo')).bio);
     const onFileSelect = (e) => {
         setFile(e.target.files[0])
     }
@@ -21,31 +24,48 @@ function EditProfileModal(props) {
                 bio: bio.value,
             }
             axios.put(`/users/profile/${JSON.parse(sessionStorage.getItem('userInfo')).userId}`, postData)
-                .then(res => updateSessionStorage())
+                .then(() => {
+                    dispatch({
+                        type: 'UpdateInfo',
+                        payload: {
+                            displayName: displayName.value,
+                            bio: bio.value
+                        }
+                    })
+                    //const userInfo = { ...JSON.parse(sessionStorage.getItem('userInfo')), bio, displayName }
+
+                    sessionStorage.setItem('userInfo', JSON.stringify(state.LoginReducer));
+                })
                 .catch(err => console.log(err))
-            
+
             return
         }
-        const uploadTask = storage.ref(`images/${file.name}`).put(file);
+        const uploadTask = storage.ref(`images/${state.LoginReducer.displayName}`).put(file);
         uploadTask.on("state_changed", snapshot => { }, error => console.log(error),
             () => {
                 storage.ref('images')
-                    .child(file.name)
+                    .child(state.LoginReducer.displayName)
                     .getDownloadURL()
                     .then(imgLink => {
                         const postData = {
                             displayName: displayName.value,
                             bio: bio.value,
-                            imgLink,
+                            profileImage:imgLink,
                         }
                         axios.put(`/users/profile/${JSON.parse(sessionStorage.getItem('userInfo')).userId}`, postData)
-                            .then(res => updateSessionStorage())
+                            .then(() => {
+                                dispatch({
+                                    type: 'UpdateInfo',
+                                    payload: postData
+                                })
+                                sessionStorage.setItem('userInfo', JSON.stringify(state.LoginReducer));
+                            })
                             .catch(err => console.log(err))
                     })
             }
 
         )
-        updateSessionStorage();
+
     }
     return (
         <Modal
